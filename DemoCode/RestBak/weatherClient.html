@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Service</title>
+</head>
+<body>
+    <h1>Weather Service</h1>
+    <p>From this page, I am going to invoke openWeather Restful Service.</p>
+    
+    <form id="weatherForm">
+        <label for="city">City Name:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    
+    <div id="weatherResult">
+        <h2>Temperature:</h2>
+        <p id="temperature"></p>
+    </div>
+
+    <div id="rawResponse">
+        <h2>Raw JSON Response:</h2>
+        <pre id="jsonResponse"></pre>
+    </div>
+    
+    <script>
+        document.getElementById('weatherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('city').value;
+            const apiKey = 'b1052408d573cc1769737c73e6a17cea';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=metric`;
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const temperature = data.main.temp;
+                    document.getElementById('temperature').textContent = `${temperature} °C`;
+                    document.getElementById('jsonResponse').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error fetching the weather data:', error);
+                });
+        });
+    </script>
+</body>
+</html>
+
+

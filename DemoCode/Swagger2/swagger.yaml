@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: User API
+  description: API for retrieving user details by username
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /userbyusername:
+    get:
+      summary: Get user details by username
+      description: Retrieves user information using the username as a parameter.
+      parameters:
+        - name: username
+          in: query
+          required: true
+          description: The username of the user to retrieve
+          schema:
+            type: string
+            example: "theUser"
+      responses:
+        "200":
+          description: Successful response with user details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 10
+                  username:
+                    type: string
+                    example: "theUser"
+                  firstName:
+                    type: string
+                    example: "John"
+                  lastName:
+                    type: string
+                    example: "James"
+                  email:
+                    type: string
+                    format: email
+                    example: "john@email.com"
+                  password:
+                    type: string
+                    example: "12345"
+                  phone:
+                    type: string
+                    example: "12345"
+                  userStatus:
+                    type: integer
+                    example: 1
+        "400":
+          description: Bad Request - Invalid username provided
+        "404":
+          description: User not found

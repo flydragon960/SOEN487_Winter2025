@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montreal Weather Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwcs9qpNxttpkfui_70Vdq0h0YS1bQnHY" defer></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function initMap() {
+            // Coordinates for Montreal
+            const montreal = { lat: 45.5017, lng: -73.5673 };
+
+            // Create a map centered on Montreal
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: montreal,
+            });
+
+            // Add a marker for Montreal with temperature info
+            const marker = new google.maps.Marker({
+                position: montreal,
+                map: map,
+                title: "Montreal: -16°C",
+            });
+
+            // Add an info window to the marker
+            const infoWindow = new google.maps.InfoWindow({
+                content: "<h3>Montreal</h3><p>Temperature: -16°C</p>",
+            });
+
+            // Open the info window when the marker is clicked
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+        }
+
+        // Initialize the map when the window loads
+        window.onload = initMap;
+    </script>
+</head>
+<body>
+    <h1>Montreal Weather Map</h1>
+    <div id="map"></div>
+</body>
+</html>
