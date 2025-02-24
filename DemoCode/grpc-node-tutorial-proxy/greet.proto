@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package greet;
+
+// Service definition
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+// Request message
+message HelloRequest {
+  string name = 1;  //The number 1 is the field tag, 
+                    //which uniquely identifies the field in the binary data.
+
+}
+
+// Response message
+message HelloReply {
+  string message = 1;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package greet;
+
+// Define the greeting service
+service Greeter {
+  rpc GreetManyTimes (HelloRequest) returns (stream HelloReply);
+}
+
+// Request message
+message HelloRequest {
+  string name = 1;
+}
+
+// Response message
+message HelloReply {
+  string message = 1;
+}

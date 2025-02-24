@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package temperature;
+
+service TemperatureService {
+  rpc RecordTemperature (stream TemperatureRequest) returns (TemperatureResponse);
+}
+
+message TemperatureRequest {
+  double value = 1;
+}
+
+message TemperatureResponse {
+  double average = 1;
+}
